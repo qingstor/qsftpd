@@ -1,0 +1,36 @@
+hash: 25415ebd9201e9d3ab426a5092affe42e023b80d7ee597192f530191c56e7bc8
+updated: 2017-04-09T17:48:34.909530925+08:00
+imports:
+- name: github.com/pengsrc/go-utils
+  version: 73f0fdb2fe4c9ddf122b8a8fd811a7b3c187200d
+  subpackages:
+  - check
+  - convert
+  - logger
+  - reopen
+- name: github.com/satori/go.uuid
+  version: 879c5887cd475cd7864858769793b2ceb0d44feb
+- name: github.com/Sirupsen/logrus
+  version: d26492970760ca5d33129d2d799e34be5c4782eb
+- name: github.com/yunify/qingstor-sdk-go
+  version: 4a6e13e0287080deb90b26b1da874396c78e7dc9
+  subpackages:
+  - config
+  - logger
+  - request
+  - request/builder
+  - request/data
+  - request/errors
+  - request/signer
+  - request/unpacker
+  - service
+  - utils
+- name: golang.org/x/sys
+  version: f3918c30c5c2cb527c0b071a27c35120a6c0719a
+  repo: git@github.com:golang/sys.git
+  subpackages:
+  - unix
+- name: gopkg.in/yaml.v2
+  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
+  repo: git@github.com:go-yaml/yaml.git
+testImports: []

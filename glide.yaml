@@ -1,0 +1,11 @@
+package: github.com/pengsrc/qsftp
+import:
+# QingStor
+- package: github.com/yunify/qingstor-sdk-go
+  version: v2.2.4
+# Utils
+- package: github.com/pengsrc/go-utils
+  version: v0.0.2
+# UUID
+- package: github.com/satori/go.uuid
+  version: v1.1.0
