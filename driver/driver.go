@@ -8,12 +8,12 @@ import (
 	"strings"
 	"time"
 
+	"github.com/pengsrc/go-utils/check"
 	"github.com/pengsrc/go-utils/convert"
 	"github.com/pengsrc/qsftp/client"
 	"github.com/pengsrc/qsftp/context"
 	"github.com/yunify/qingstor-sdk-go/request/errors"
 	"github.com/yunify/qingstor-sdk-go/service"
-	"github.com/pengsrc/go-utils/check"
 )
 
 type QSDriver struct {

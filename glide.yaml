@@ -5,7 +5,12 @@ import:
   version: v2.2.4
 # Utils
 - package: github.com/pengsrc/go-utils
-  version: v0.0.2
+  version: v0.0.3
 # UUID
 - package: github.com/satori/go.uuid
   version: v1.1.0
+# Command line
+- package: github.com/spf13/cobra
+# File change watcher
+- package: github.com/fsnotify/fsnotify
+  version: v1.4.2

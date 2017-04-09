@@ -1,17 +1,26 @@
-hash: 25415ebd9201e9d3ab426a5092affe42e023b80d7ee597192f530191c56e7bc8
-updated: 2017-04-09T17:48:34.909530925+08:00
+hash: 58c88a0db505cdcfaed37b09be039cfb02ac1dbf563ded8e9cbcb1e7d7a4abf6
+updated: 2017-04-10T15:54:52.197554625+08:00
 imports:
+- name: github.com/fsnotify/fsnotify
+  version: 629574ca2a5df945712d3079857300b5e4da0236
+- name: github.com/inconshreveable/mousetrap
+  version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
 - name: github.com/pengsrc/go-utils
-  version: 73f0fdb2fe4c9ddf122b8a8fd811a7b3c187200d
+  version: 38b7eee72a50a4697e3c6e96b5e59699bff589ac
   subpackages:
   - check
   - convert
   - logger
   - reopen
+  - yaml
 - name: github.com/satori/go.uuid
   version: 879c5887cd475cd7864858769793b2ceb0d44feb
 - name: github.com/Sirupsen/logrus
   version: d26492970760ca5d33129d2d799e34be5c4782eb
+- name: github.com/spf13/cobra
+  version: 5deb57bbca49eb370538fc295ba4b2988f9f5e09
+- name: github.com/spf13/pflag
+  version: 9a906f17374922ed0f74e1b2f593d3723f2ffb00
 - name: github.com/yunify/qingstor-sdk-go
   version: 4a6e13e0287080deb90b26b1da874396c78e7dc9
   subpackages:
