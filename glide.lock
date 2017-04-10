@@ -1,5 +1,5 @@
-hash: 58c88a0db505cdcfaed37b09be039cfb02ac1dbf563ded8e9cbcb1e7d7a4abf6
-updated: 2017-04-10T15:54:52.197554625+08:00
+hash: c1849c3aea25f7c87f0cb752b4adfae5dd396a1c18c240cf19bc9ea54b992219
+updated: 2017-04-11T14:04:09.099366931+08:00
 imports:
 - name: github.com/fsnotify/fsnotify
   version: 629574ca2a5df945712d3079857300b5e4da0236
@@ -36,10 +36,10 @@ imports:
   - utils
 - name: golang.org/x/sys
   version: f3918c30c5c2cb527c0b071a27c35120a6c0719a
-  repo: git@github.com:golang/sys.git
+  repo: https://github.com/golang/sys.git
   subpackages:
   - unix
 - name: gopkg.in/yaml.v2
   version: a5b47d31c556af34a302ce5d659e6fea44d90de0
-  repo: git@github.com:go-yaml/yaml.git
+  repo: https://github.com/go-yaml/yaml.git
 testImports: []

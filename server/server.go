@@ -8,9 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pengsrc/qsftp/client"
-	"github.com/pengsrc/qsftp/context"
-	"github.com/pengsrc/qsftp/driver"
+	"github.com/yunify/qsftp/client"
+	"github.com/yunify/qsftp/context"
+	"github.com/yunify/qsftp/driver"
 	"github.com/satori/go.uuid"
 )
 

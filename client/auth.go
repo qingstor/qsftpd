@@ -1,6 +1,6 @@
 package client
 
-import "github.com/pengsrc/qsftp/context"
+import "github.com/yunify/qsftp/context"
 
 // Handle the "USER" command.
 func (c *Handler) handleUSER() {

@@ -1,6 +1,6 @@
 # qsftp
 
-[![License](http://img.shields.io/badge/license-apache%20v2-blue.svg)](https://github.com/pengsrc/qsftp/blob/master/LICENSE)
+[![License](http://img.shields.io/badge/license-apache%20v2-blue.svg)](https://github.com/yunify/qsftp/blob/master/LICENSE)
 
 A ftp server that uses QingStor Object Storage as storage backend.
 

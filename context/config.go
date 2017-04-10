@@ -9,7 +9,7 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/pengsrc/go-utils/check"
 	"github.com/pengsrc/go-utils/yaml"
-	"github.com/pengsrc/qsftp/utils"
+	"github.com/yunify/qsftp/utils"
 )
 
 // A Config stores a configuration of qsftp.

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"io"
 
-	"github.com/pengsrc/qsftp/context"
+	"github.com/yunify/qsftp/context"
 )
 
 type QSDownloadFile struct {

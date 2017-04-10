@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/pengsrc/qsftp/context"
+	"github.com/yunify/qsftp/context"
 	"github.com/yunify/qingstor-sdk-go/service"
 )
 

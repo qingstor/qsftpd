@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pengsrc/qsftp/context"
+	"github.com/yunify/qsftp/context"
 )
 
 func (c *Handler) handleAUTH() {

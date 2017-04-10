@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pengsrc/qsftp/context"
-	"github.com/pengsrc/qsftp/transfer"
-	"github.com/pengsrc/qsftp/utils"
+	"github.com/yunify/qsftp/context"
+	"github.com/yunify/qsftp/transfer"
+	"github.com/yunify/qsftp/utils"
 )
 
 // Driver handles the file system access logic.

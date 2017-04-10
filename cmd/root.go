@@ -7,8 +7,8 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/pengsrc/go-utils/check"
-	"github.com/pengsrc/qsftp/context"
-	"github.com/pengsrc/qsftp/server"
+	"github.com/yunify/qsftp/context"
+	"github.com/yunify/qsftp/server"
 	"github.com/spf13/cobra"
 )
 

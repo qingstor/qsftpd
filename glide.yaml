@@ -1,14 +1,22 @@
-package: github.com/pengsrc/qsftp
+package: github.com/yunify/qsftp
 import:
-# QingStor
-- package: github.com/yunify/qingstor-sdk-go
-  version: v2.2.4
+# GoLang
+- package: golang.org/x/sys
+  version: f3918c30c5c2cb527c0b071a27c35120a6c0719a
+  repo:    https://github.com/golang/sys.git
 # Utils
 - package: github.com/pengsrc/go-utils
   version: v0.0.3
+# YAML
+- package: gopkg.in/yaml.v2
+  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
+  repo:    https://github.com/go-yaml/yaml.git
 # UUID
 - package: github.com/satori/go.uuid
   version: v1.1.0
+# QingStor
+- package: github.com/yunify/qingstor-sdk-go
+  version: v2.2.4
 # Command line
 - package: github.com/spf13/cobra
 # File change watcher

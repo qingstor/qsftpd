@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/pengsrc/qsftp/cmd"
+	"github.com/yunify/qsftp/cmd"
 )
 
 func main() {
