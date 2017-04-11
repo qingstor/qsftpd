@@ -12,6 +12,7 @@ var commandsMap map[string]*CommandDescription
 func init() {
 	// This is shared between FTPServer instances as there's no point in making
 	// the FTP commands behave differently between them.
+	// Whole commands can be found here: https://tools.ietf.org/html/rfc5797
 
 	commandsMap = make(map[string]*CommandDescription)
 
@@ -59,4 +60,24 @@ func init() {
 	commandsMap["EPSV"] = &CommandDescription{Fn: (*Handler).handlePASV}
 	commandsMap["PORT"] = &CommandDescription{Fn: (*Handler).handlePORT}
 	commandsMap["QUIT"] = &CommandDescription{Fn: (*Handler).handleQUIT, Open: true}
+
+	// Not Supported command.
+	commandsMap["ABOR"] = nil
+	commandsMap["ACCT"] = nil
+	commandsMap["ADAT"] = nil
+	commandsMap["CCC"] = nil
+	commandsMap["CONF"] = nil
+	commandsMap["ENC"] = nil
+	commandsMap["EPRT"] = nil
+	commandsMap["HELP"] = nil
+	commandsMap["LANG"] = nil
+	commandsMap["MIC"] = nil
+	commandsMap["MLSD"] = nil
+	commandsMap["MLST"] = nil
+	commandsMap["MODE"] = nil
+	commandsMap["REIN"] = nil
+	commandsMap["SMNT"] = nil
+	commandsMap["STOU"] = nil
+	commandsMap["STRU"] = nil
+
 }

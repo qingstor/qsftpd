@@ -1,18 +1,23 @@
-hash: c1849c3aea25f7c87f0cb752b4adfae5dd396a1c18c240cf19bc9ea54b992219
-updated: 2017-04-11T14:04:09.099366931+08:00
+hash: 47c637985fc3d31f43eb8b6a414c1f4d3e6628b48465fe071e61b5b80023b04f
+updated: 2017-04-11T16:27:49.686585925+08:00
 imports:
 - name: github.com/fsnotify/fsnotify
   version: 629574ca2a5df945712d3079857300b5e4da0236
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
-- name: github.com/pengsrc/go-utils
-  version: 38b7eee72a50a4697e3c6e96b5e59699bff589ac
+- name: github.com/pengsrc/go-shared
+  version: e5554a5c0880fd52ba62e92b531ce7b9312b073c
   subpackages:
   - check
   - convert
   - logger
-  - reopen
   - yaml
+- name: github.com/pengsrc/go-utils
+  version: e5554a5c0880fd52ba62e92b531ce7b9312b073c
+  subpackages:
+  - check
+  - convert
+  - reopen
 - name: github.com/satori/go.uuid
   version: 879c5887cd475cd7864858769793b2ceb0d44feb
 - name: github.com/Sirupsen/logrus

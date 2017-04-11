@@ -1,6 +1,6 @@
 package context
 
-// Settings define all the server settings.
+// ServerSettings define all the server settings.
 type ServerSettings struct {
 	ListenHost     string     // Host to receive connections on
 	ListenPort     int        // Port to listen on

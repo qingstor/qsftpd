@@ -37,7 +37,7 @@ func (c *Handler) handlePASV() {
 	}
 
 	if err != nil {
-		context.Logger.Error("Could not listen: %v", err)
+		context.Logger.ErrorF("Could not listen: %v", err)
 		return
 	}
 

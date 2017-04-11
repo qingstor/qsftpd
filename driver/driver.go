@@ -8,21 +8,23 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pengsrc/go-utils/check"
-	"github.com/pengsrc/go-utils/convert"
-	"github.com/yunify/qsftp/client"
-	"github.com/yunify/qsftp/context"
+	"github.com/pengsrc/go-shared/check"
+	"github.com/pengsrc/go-shared/convert"
 	"github.com/yunify/qingstor-sdk-go/request/errors"
 	"github.com/yunify/qingstor-sdk-go/service"
+	"github.com/yunify/qsftp/client"
+	"github.com/yunify/qsftp/context"
 )
 
+// QSDriver stores prefix
 type QSDriver struct {
 	prefix string
 }
 
+// ChangeDirectory changes current directory
 func (d *QSDriver) ChangeDirectory(cc client.Context, directory string) error {
 	directory = removeLeadingSlash(addTrailingSlash(trimPath(directory)))
-	context.Logger.Debug("Change directory: %s", directory)
+	context.Logger.DebugF("Change directory: %s", directory)
 
 	if directory == "" {
 		return nil
@@ -52,9 +54,10 @@ func (d *QSDriver) ChangeDirectory(cc client.Context, directory string) error {
 	return nil
 }
 
+// MakeDirectory creates directory
 func (d *QSDriver) MakeDirectory(cc client.Context, directory string) error {
 	directory = removeLeadingSlash(addTrailingSlash(trimPath(directory)))
-	context.Logger.Debug("Mkdir directory: %s", directory)
+	context.Logger.DebugF("Mkdir directory: %s", directory)
 
 	_, err := context.Bucket.PutObject(directory, &service.PutObjectInput{
 		ContentType: convert.String("application/x-directory"),
@@ -62,6 +65,7 @@ func (d *QSDriver) MakeDirectory(cc client.Context, directory string) error {
 	return err
 }
 
+// ListFiles lists files undir dir
 func (d *QSDriver) ListFiles(cc client.Context, dir string) ([]os.FileInfo, error) {
 	dir = trimPath(dir)
 	if dir == "" {
@@ -73,7 +77,7 @@ func (d *QSDriver) ListFiles(cc client.Context, dir string) ([]os.FileInfo, erro
 		dir = ""
 	}
 
-	context.Logger.Debug("List files: %s", dir)
+	context.Logger.DebugF("List files: %s", dir)
 
 	infos := []os.FileInfo{}
 
@@ -108,9 +112,10 @@ func (d *QSDriver) ListFiles(cc client.Context, dir string) ([]os.FileInfo, erro
 	return infos, nil
 }
 
+// OpenFile opens file for read and write
 func (d *QSDriver) OpenFile(cc client.Context, path string, flag int) (client.FileStream, error) {
 	path = removeLeadingSlash(trimPath(path))
-	context.Logger.Debug("Open file: %s", path)
+	context.Logger.DebugF("Open file: %s", path)
 
 	switch flag {
 	case os.O_RDONLY:
@@ -122,9 +127,10 @@ func (d *QSDriver) OpenFile(cc client.Context, path string, flag int) (client.Fi
 	return nil, fmt.Errorf("Failed to open path: %s", path)
 }
 
+// DeleteFile delete a path
 func (d *QSDriver) DeleteFile(cc client.Context, path string) error {
 	path = removeLeadingSlash(trimPath(path))
-	context.Logger.Debug("Delete file: %s", path)
+	context.Logger.DebugF("Delete file: %s", path)
 
 	_, err := context.Bucket.DeleteObject(path)
 	if err != nil {
@@ -138,9 +144,10 @@ func (d *QSDriver) DeleteFile(cc client.Context, path string) error {
 	return nil
 }
 
+// GetFileInfo gets file stats
 func (d *QSDriver) GetFileInfo(cc client.Context, filePath string) (os.FileInfo, error) {
 	filePath = removeLeadingSlash(trimPath(filePath))
-	context.Logger.Debug("Get file info: %s", filePath)
+	context.Logger.DebugF("Get file info: %s", filePath)
 
 	needTrailingSlash := false
 
@@ -175,6 +182,7 @@ func (d *QSDriver) GetFileInfo(cc client.Context, filePath string) (os.FileInfo,
 	}, nil
 }
 
+// RenameFile renames a file name
 func (d *QSDriver) RenameFile(cc client.Context, from, to string) error {
 	from = trimPath(from)
 	to = trimPath(to)
@@ -197,8 +205,8 @@ func (d *QSDriver) RenameFile(cc client.Context, from, to string) error {
 	}
 	from = removeLeadingSlash(from)
 	to = removeLeadingSlash(to)
-	context.Logger.Debug("Rename file from: %s", from)
-	context.Logger.Debug("Rename file to: %s", to)
+	context.Logger.DebugF("Rename file from: %s", from)
+	context.Logger.DebugF("Rename file to: %s", to)
 
 	needTrailingSlash := false
 
@@ -229,10 +237,12 @@ func (d *QSDriver) RenameFile(cc client.Context, from, to string) error {
 	return err
 }
 
+// CanAllocate always returns true for the backend is QingStor Bucket
 func (d *QSDriver) CanAllocate(cc client.Context, size int) (bool, error) {
 	return true, nil
 }
 
+// ChmodFile changes file mode
 func (d *QSDriver) ChmodFile(cc client.Context, path string, mode os.FileMode) error {
 	return nil
 }

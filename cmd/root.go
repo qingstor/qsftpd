@@ -6,10 +6,10 @@ import (
 	"syscall"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/pengsrc/go-utils/check"
+	"github.com/pengsrc/go-shared/check"
+	"github.com/spf13/cobra"
 	"github.com/yunify/qsftp/context"
 	"github.com/yunify/qsftp/server"
-	"github.com/spf13/cobra"
 )
 
 var (
@@ -26,7 +26,7 @@ var RootCmd = &cobra.Command{
 		reloadConfig()
 		curConfig.WatchConfig(cfgFile, func(e fsnotify.Event) {
 			reloadConfig()
-			context.Logger.Debug("Config file reloaded.")
+			context.Logger.DebugF("Config file reloaded.")
 		})
 
 		ftpServer := server.NewFTPServer()

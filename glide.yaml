@@ -5,8 +5,8 @@ import:
   version: f3918c30c5c2cb527c0b071a27c35120a6c0719a
   repo:    https://github.com/golang/sys.git
 # Utils
-- package: github.com/pengsrc/go-utils
-  version: v0.0.3
+- package: github.com/pengsrc/go-shared
+  version: v0.0.4
 # YAML
 - package: gopkg.in/yaml.v2
   version: a5b47d31c556af34a302ce5d659e6fea44d90de0

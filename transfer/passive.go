@@ -18,7 +18,7 @@ func (p *PassiveHandler) Open() (net.Conn, error) {
 	return p.ConnectionWait(time.Minute)
 }
 
-// Closing only the client connection is not supported at that time.
+// Close only the client connection is not supported at that time.
 func (p *PassiveHandler) Close() error {
 	if p.TCPListener != nil {
 		p.TCPListener.Close()
@@ -29,6 +29,7 @@ func (p *PassiveHandler) Close() error {
 	return nil
 }
 
+// ConnectionWait wait for connection time out
 func (p *PassiveHandler) ConnectionWait(wait time.Duration) (net.Conn, error) {
 	if p.connection == nil {
 		p.TCPListener.SetDeadline(time.Now().Add(wait))

@@ -5,6 +5,7 @@ import (
 	"runtime"
 )
 
+// GetHome returns user's home
 func GetHome() string {
 	home := os.Getenv("HOME")
 	if runtime.GOOS == "windows" {

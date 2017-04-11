@@ -7,8 +7,8 @@ import (
 	"strings"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/pengsrc/go-utils/check"
-	"github.com/pengsrc/go-utils/yaml"
+	"github.com/pengsrc/go-shared/check"
+	"github.com/pengsrc/go-shared/yaml"
 	"github.com/yunify/qsftp/utils"
 )
 
@@ -32,6 +32,7 @@ type Config struct {
 	Users map[string]string `yaml:"users"`
 }
 
+// NewConfig creates a new Config
 func NewConfig() *Config {
 	return &Config{}
 }
@@ -94,6 +95,7 @@ func (c *Config) Check() error {
 	return nil
 }
 
+// WatchConfig watches the configuration and reload while changed.
 func (c *Config) WatchConfig(p string, run func(in fsnotify.Event)) {
 	go func() {
 		watcher, err := fsnotify.NewWatcher()
