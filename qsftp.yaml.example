@@ -1,21 +1,24 @@
-# Config qingstor service
+# QingStor service settings
 qingstor:
-    access_key_id: access_key_id_example
-    secret_access_key: secret_access_key_example
-    host: qingstor.com
-    port: 443
-    protocol: https
-    log_level: error
+  access_key_id: access_key_id_example
+  secret_access_key: secret_access_key_example
+  host: qingstor.com
+  port: 443
+  protocol: https
+  log_level: warn
 
-# Config qsftp
+# Bucket settings
+bucket_name: bucket_name_example
+zone: pek3a
+
+# FTP server settings
 listen_host: 127.0.0.1
 listen_port: 2121
 max_connections: 128
-# your bucket's name
-bucket_name: bucket_name_example
-# your bucket's zone
-zone: pek3a
-# username and their password, qsftp use anonymous login by defaults.
-# if you want to add users, just uncomment below lines, and add user info.
+
+# Authentication settings
+# Allowed anonymous login by default.
+# If you want to specify ftp users, uncomment the lines below and add username
+# and password.
 #users:
-#    username_example: password_example
+#  username_example: password_example
