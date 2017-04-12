@@ -28,3 +28,5 @@ vendor
 bin
 release
 coverage
+
+qsftp.yaml

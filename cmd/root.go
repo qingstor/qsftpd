@@ -20,8 +20,8 @@ var (
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "qsftp",
-	Short: "A ftp server that uses QingStor Object Storage as storage backend.",
-	Long:  `A ftp server that uses QingStor Object Storage as storage backend.`,
+	Short: "A FTP server that persists all data to QingStor Object Storage.",
+	Long:  "A FTP server that persists all data to QingStor Object Storage.",
 	Run: func(cmd *cobra.Command, args []string) {
 		reloadConfig()
 		curConfig.WatchConfig(cfgFile, func(e fsnotify.Event) {
