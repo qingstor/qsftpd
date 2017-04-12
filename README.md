@@ -1,63 +1,69 @@
 # qsftp
 
+[![Build Status](https://travis-ci.org/yunify/qsftp.svg?branch=master)](https://travis-ci.org/yunify/qsftp)
+[![Go Report Card](https://goreportcard.com/badge/github.com/yunify/qsftp)](https://goreportcard.com/report/github.com/yunify/qsftp)
 [![License](http://img.shields.io/badge/license-apache%20v2-blue.svg)](https://github.com/yunify/qsftp/blob/master/LICENSE)
 
-A ftp server that uses QingStor Object Storage as storage backend.
+A FTP server that persists all data to QingStor Object Storage.
 
 ## Usage
 
-### Create config
+``` bash
+$ qsftp --help
+A FTP server that persists all data to QingStor Object Storage.
 
-copy `qsftp.yaml.example` and edit as your desired.
+Usage:
+  qsftp [flags]
+
+Flags:
+  -c, --config string   Specify config file (default "qsftp.yaml")
+```
+
+### Create configuration
+
+Here's an example config file named `qsftp.yaml.example` in the project root directory, copy it to `qsftp.yaml` and change the settings.
 
 ### Run qsftp
 
-```bash
-# without -c, qsftp will run as qsftp -c qsftp.yaml
-qsftp -c path/to/your/config
-```
+Run the FTP server
 
-Everything is done!
+``` bash
+$ qsftp -c path/to/your/config.yaml
+[2017-04-12T03:24:40.541Z #2527]  INFO -- : Listening... 127.0.0.1:2121
+[2017-04-12T03:24:40.541Z #2527]  INFO -- : Starting...
+[2017-04-12T03:24:49.330Z #2527]  INFO -- : FTP Client connected: ftp.connected, id: 76e209d6a89448279e947a7babe0097d, RemoteAddr: 127.0.0.1:51788, Total: 1
+......
+```
 
 ## Not Supported Commands
 
+Currently, the commands listed below are not supported. You can submit issue to request new features.
+
 ```
-+-------+------+-------------------+------+------+------------------+
-| cmd   | FEAT | description       | type | conf | RFC#s/References |
-|       | Code |                   |      |      | and Notes        |
-+-------+------+-------------------+------+------+------------------+
-| ABOR  | base | Abort             | s    | m    | 959              |
-| ACCT  | base | Account           | a    | m    | 959              |
-| ADAT  | secu | Authentication/   | a    | o    | 2228, 2773, 4217 |
-|       |      | Security Data     |      |      |                  |
-| CCC   | secu | Clear Command     | a    | o    | 2228             |
-|       |      | Channel           |      |      |                  |
-| CONF  | secu | Confidentiality   | a    | o    | 2228             |
-|       |      | Protected Command |      |      |                  |
-| ENC   | secu | Privacy Protected | a    | o    | 2228, 2773, 4217 |
-|       |      | Command           |      |      |                  |
-| EPRT  | nat6 | Extended Port     | p    | o    | 2428             |
-| HELP  | base | Help              | s    | m    | 959              |
-| LANG  | UTF8 | Language (for     | p    | o    | 2640             |
-|       |      | Server Messages)  |      |      |                  |
-| MIC   | secu | Integrity         | a    | o    | 2228, 2773, 4217 |
-|       |      | Protected Command |      |      |                  |
-| MLSD  | MLST | List Directory    | s    | o    | 3659             |
-|       |      | (for machine)     |      |      |                  |
-| MLST  | MLST | List Single       | s    | o    | 3659             |
-|       |      | Object            |      |      |                  |
-| MODE  | base | Transfer Mode     | p    | m    | 959              |
-| REIN  | base | Reinitialize      | a    | m    | 959              |
-| SMNT  | base | Structure Mount   | a    | o    | 959              |
-| STOU  | base | Store Unique      | a    | o    | 959, 1123        |
-| STRU  | base | File Structure    | p    | m    | 959              |
-+-------+------+-------------------+------+------+------------------+
++---------+-----------------------------------+
+| Command |           Description             |
++---------+-----------------------------------+
+|  ABOR   | Abort                             |
+|  ACCT   | Account                           |
+|  ADAT   | Authentication / Security Data    |
+|  CCC    | Clear Command Channel             |
+|  CONF   | Confidentiality Protected Command |
+|  ENC    | Privacy Protected Command         |
+|  EPRT   | Extended Port                     |
+|  HELP   | Help                              |
+|  LANG   | Language (for Server Messages)    |
+|  MIC    | Integrity Protected Command       |
+|  MLSD   | List Directory (for machine)      |
+|  MLST   | List Single Object                |
+|  MODE   | Transfer Mode                     |
+|  REIN   | Reinitialize                      |
+|  SMNT   | Structure Mount                   |
+|  STOU   | Store Unique                      |
+|  STRU   | File Structure                    |
++---------+-----------------------------------+
 ```
 
-All commands can be found [here](https://tools.ietf.org/html/rfc5797).
-
-If you need to use commands that we not supported, you can create issues to let us know.
-
+___Note:__ All FTP commands can be found here ([https://tools.ietf.org/html/rfc5797](https://tools.ietf.org/html/rfc5797))._
 
 ## LICENSE
 
