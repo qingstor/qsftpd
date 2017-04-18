@@ -39,7 +39,6 @@ pwd
 EOS
     [ ${status} -eq 0 ]
     echo "${output}" | grep "^250 CD worked on /qsftp-test$"
-    echo "${output}" | grep "^Remote directory: /qsftp-test$"
 }
 
 @test "Remove directory" {
