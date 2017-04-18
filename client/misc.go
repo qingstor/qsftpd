@@ -11,6 +11,7 @@ import (
 func (c *Handler) handleAUTH() {
 	c.WriteMessage(550, "Cannot get a TLS config")
 
+	//FIXME: AUTH Has not been properly handled
 	//c.WriteMessage(234, "AUTH command ok. Expecting TLS Negotiation.")
 	//c.conn = tls.Server(c.conn, tlsConfig)
 	//c.reader = bufio.NewReader(c.conn)

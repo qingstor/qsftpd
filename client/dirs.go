@@ -104,13 +104,6 @@ func fileStat(file os.FileInfo) string {
 func (c *Handler) dirList(w io.Writer, files []os.FileInfo) error {
 	for _, file := range files {
 		fmt.Fprintf(w, "%s\r\n", fileStat(file))
-		/*
-			fmt.Fprint(w, file.Mode().String())
-			fmt.Fprintf(w, " 1 %s %s ", "ftp", "ftp")
-			fmt.Fprintf(w, "%12d", file.Size())
-			fmt.Fprintf(w, file.ModTime().Format(" Jan _2 15:04 "))
-			fmt.Fprintf(w, "%s\r\n", file.Name())
-		*/
 	}
 	fmt.Fprint(w, "\r\n")
 	return nil

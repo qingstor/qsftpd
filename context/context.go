@@ -1,6 +1,7 @@
 package context
 
 import (
+	"github.com/pengsrc/go-utils/check"
 	"github.com/pengsrc/go-shared/logger"
 	"github.com/pengsrc/go-shared/yaml"
 	qsConfig "github.com/yunify/qingstor-sdk-go/config"
@@ -46,23 +47,16 @@ func SetupContext(c *Config) error {
 	}
 
 	curData, err := yaml.Encode(c.QingStor)
-	if err != nil {
-		return err
-	}
+	check.ErrorForExit("QingStor service settings encode error", err)
 
 	err = curQingStorConfig.LoadConfigFromContent(curData)
-	if err != nil {
-		return err
-	}
+	check.ErrorForExit("Load QingStor service settings error", err)
 
 	qsService, err := service.Init(curQingStorConfig)
-	if err != nil {
-		return err
-	}
+	check.ErrorForExit("Init QingStor config error", err)
+
 	Bucket, err = qsService.Bucket(c.BucketName, c.Zone)
-	if err != nil {
-		return err
-	}
+	check.ErrorForExit("Create QingStor bucket error", err)
 
 	return nil
 }
