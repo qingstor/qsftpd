@@ -22,3 +22,11 @@ import:
 # File change watcher
 - package: github.com/fsnotify/fsnotify
   version: v1.4.2
+# Test
+- package: github.com/stretchr/testify
+  version: v1.1.4
+- package: github.com/davecgh/go-spew
+  version: v1.1.0
+- package: github.com/pmezard/go-difflib
+  version: v1.0.0
+

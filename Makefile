@@ -7,14 +7,17 @@ PKGS_WITHOUT_VENDOR=$(shell go list ./... | grep -v "/vendor/")
 .PHONY: help
 help:
 	@echo "Please use \`make <target>\` where <target> is one of"
-	@echo "  all           to check, build, test and release snips"
-	@echo "  check         to vet and lint snips"
-	@echo "  build         to create bin directory and build snips"
-	@echo "  release       to build and release snips"
-	@echo "  clean         to clean build and test files"
+	@echo "  all               to check, build, test and release"
+	@echo "  check             to vet and lint"
+	@echo "  build             to create bin directory and build"
+	@echo "  test              to run test"
+	@echo "  run               to run qsftp locally"
+	@echo "  integration-test  to run integration test"
+	@echo "  release           to build and release"
+	@echo "  clean             to clean build and test files"
 
 .PHONY: all
-all: check build release clean
+all: check build test release clean
 
 .PHONY: check
 check: vet lint
@@ -37,6 +40,27 @@ build:
 	@echo "build qsftp"
 	mkdir -p ./bin
 	go build -o ./bin/qsftp .
+	@echo "ok"
+
+.PHONY: test
+test:
+	@echo "run test"
+	@go test -v ${PKGS_WITHOUT_VENDOR}
+	@echo "ok"
+
+.PHONY: run
+run: build
+	@echo "run qsftp"
+	./bin/qsftp -c qsftp.yaml
+	@echo "ok"
+
+.PHONY: integration-test
+integration-test:
+	@if [[ ! -f "$$(which bats)" ]]; then \
+		echo "ERROR: Command \"bats\" not found."; \
+	fi
+	@echo "run integration test"
+	bats test
 	@echo "ok"
 
 .PHONY: release
