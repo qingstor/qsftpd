@@ -25,7 +25,7 @@ Here's an example config file named `qsftp.yaml.example` in the project root dir
 
 ### Run qsftp
 
-Run the FTP server
+Run the FTP server.
 
 ``` bash
 $ qsftp -c path/to/your/config.yaml
@@ -34,6 +34,8 @@ $ qsftp -c path/to/your/config.yaml
 [2017-04-12T03:24:49.330Z #2527]  INFO -- : FTP Client connected: ftp.connected, id: 76e209d6a89448279e947a7babe0097d, RemoteAddr: 127.0.0.1:51788, Total: 1
 ......
 ```
+
+___Note:__ When you upload large files, please set the timeout time of FTP client long enough to avoid connection disruption._
 
 ## Not Supported Commands
 
