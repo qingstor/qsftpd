@@ -8,7 +8,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pengsrc/go-shared/check"
 	"github.com/pengsrc/go-shared/convert"
 	"github.com/yunify/qingstor-sdk-go/request/errors"
 	"github.com/yunify/qingstor-sdk-go/service"
@@ -65,17 +64,16 @@ func (d *QSDriver) MakeDirectory(cc client.Context, directory string) error {
 	return err
 }
 
-// ListFiles lists files undir dir
+// ListFiles lists files in specified directory.
 func (d *QSDriver) ListFiles(cc client.Context, dir string) ([]os.FileInfo, error) {
+	if strings.HasSuffix(dir, "/-a") {
+		dir = dir[0 : len(dir)-2]
+	}
 	dir = trimPath(dir)
 	if dir == "" {
 		dir = cc.Path()
 	}
 	dir = removeLeadingSlash(addTrailingSlash(dir))
-
-	if check.StringSliceContains([]string{"-a", "-a/"}, dir) {
-		dir = ""
-	}
 
 	context.Logger.DebugF("List files: %s", dir)
 
