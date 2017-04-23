@@ -3,10 +3,8 @@ package context
 import (
 	"errors"
 	"io/ioutil"
-	"path/filepath"
 	"strings"
 
-	"github.com/fsnotify/fsnotify"
 	"github.com/pengsrc/go-shared/check"
 	"github.com/pengsrc/go-shared/yaml"
 	"github.com/yunify/qsftp/utils"
@@ -93,39 +91,4 @@ func (c *Config) Check() error {
 	}
 
 	return nil
-}
-
-// WatchConfig watches the configuration and reload while changed.
-func (c *Config) WatchConfig(p string, run func(in fsnotify.Event)) {
-	go func() {
-		watcher, err := fsnotify.NewWatcher()
-		check.ErrorForExit("qsftp config", err)
-
-		defer watcher.Close()
-
-		configFile := filepath.Clean(p)
-		configDir, _ := filepath.Split(p)
-
-		done := make(chan bool)
-		go func() {
-			for {
-				select {
-				case event := <-watcher.Events:
-					// we only care about the config file
-					if filepath.Clean(event.Name) == configFile {
-						if event.Op&fsnotify.Write == fsnotify.Write || event.Op&fsnotify.Create == fsnotify.Create {
-							err := c.LoadConfigFromFilepath(p)
-							check.ErrorForExit("qsftp config", err)
-							run(event)
-						}
-					}
-				case err := <-watcher.Errors:
-					check.ErrorForExit("qsftp config", err)
-				}
-			}
-		}()
-
-		watcher.Add(configDir)
-		<-done
-	}()
 }

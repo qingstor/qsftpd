@@ -5,7 +5,6 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/fsnotify/fsnotify"
 	"github.com/pengsrc/go-shared/check"
 	"github.com/spf13/cobra"
 	"github.com/yunify/qsftp/context"
@@ -24,10 +23,6 @@ var RootCmd = &cobra.Command{
 	Long:  "A FTP server that persists all data to QingStor Object Storage.",
 	Run: func(cmd *cobra.Command, args []string) {
 		reloadConfig()
-		curConfig.WatchConfig(cfgFile, func(e fsnotify.Event) {
-			reloadConfig()
-			context.Logger.DebugF("Config file reloaded.")
-		})
 
 		ftpServer := server.NewFTPServer()
 		go signalHandler(ftpServer)
