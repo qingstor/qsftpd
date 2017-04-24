@@ -98,8 +98,11 @@ func (c *Handler) storeOrAppend(conn net.Conn, name string, append bool) (int64,
 		c.ctxRest = 0
 	}
 
-	defer file.Close()
-	return io.Copy(file, conn)
+	written, err := io.Copy(file, conn)
+	if err != nil {
+		return written, err
+	}
+	return written, file.Close()
 }
 
 func (c *Handler) handleDELE() {
