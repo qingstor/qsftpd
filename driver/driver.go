@@ -66,7 +66,7 @@ func (d *QSDriver) MakeDirectory(cc client.Context, directory string) error {
 
 // ListFiles lists files in specified directory.
 func (d *QSDriver) ListFiles(cc client.Context, dir string) ([]os.FileInfo, error) {
-	if strings.HasSuffix(dir, "/-a") {
+	if strings.HasSuffix(dir, "/-a") || strings.HasSuffix(dir, "/-l") {
 		dir = dir[0 : len(dir)-2]
 	}
 	dir = trimPath(dir)
