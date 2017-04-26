@@ -72,7 +72,7 @@ func (c *Handler) handleSTATServer() {
 
 func (c *Handler) handleOPTS() {
 	args := strings.SplitN(c.param, " ", 2)
-	if args[0] == "UTF8" {
+	if strings.ToUpper(args[0]) == "UTF8" {
 		c.WriteMessage(200, "I'm in UTF8 only anyway")
 	} else {
 		c.WriteMessage(500, "Don't know this option")
