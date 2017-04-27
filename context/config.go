@@ -23,6 +23,7 @@ type Config struct {
 
 	ListenHost     string `yaml:"listen_host"`
 	ListenPort     int    `yaml:"listen_port"`
+	PublicHost     string `yaml:"public_host"`
 	MaxConnections int    `yaml:"max_connections"`
 	BucketName     string `yaml:"bucket_name"`
 	Zone           string `yaml:"zone"`
@@ -75,6 +76,9 @@ func (c *Config) Check() error {
 	} else if c.ListenPort == -1 {
 		// For the automatic value, We let the system decide (0).
 		c.ListenPort = 0
+	}
+	if c.PublicHost == "" {
+		c.PublicHost = "127.0.0.1"
 	}
 	if c.MaxConnections == 0 {
 		c.MaxConnections = 10000

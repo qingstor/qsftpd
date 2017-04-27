@@ -31,7 +31,7 @@ func SetupContext(c *Config) error {
 	Settings = &ServerSettings{
 		ListenHost:     c.ListenHost,
 		ListenPort:     c.ListenPort,
-		PublicHost:     c.ListenHost,
+		PublicHost:     c.PublicHost,
 		MaxConnections: c.MaxConnections,
 		DataPortRange: &PortRange{
 			Start: 6000,

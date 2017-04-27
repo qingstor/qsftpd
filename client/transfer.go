@@ -17,11 +17,13 @@ func (c *Handler) handlePASV() {
 	var err error
 
 	portRange := context.Settings.DataPortRange
+	listenHost := context.Settings.ListenHost
+	publicHost := context.Settings.PublicHost
 
 	if portRange != nil {
 		for start := portRange.Start; start < portRange.End; start++ {
 			port := portRange.Start + rand.Intn(portRange.End-portRange.Start)
-			localAddr, err := net.ResolveTCPAddr("tcp", "0.0.0.0:"+fmt.Sprintf("%d", port))
+			localAddr, err := net.ResolveTCPAddr("tcp", fmt.Sprintf("%s:%d", listenHost, port))
 			if err != nil {
 				continue
 			}
@@ -60,15 +62,8 @@ func (c *Handler) handlePASV() {
 	if c.command == "PASV" {
 		p1 := p.Port / 256
 		p2 := p.Port - (p1 * 256)
-		// Provide our external IP address so the ftp client can connect back to us.
-		ip := context.Settings.PublicHost
 
-		// If we don't have an IP address, we can take the one that was used for the current connection.
-		if ip == "" {
-			ip = strings.Split(c.conn.LocalAddr().String(), ":")[0]
-		}
-
-		quads := strings.Split(ip, ".")
+		quads := strings.Split(publicHost, ".")
 		c.WriteMessage(227, fmt.Sprintf("Entering Passive Mode (%s,%s,%s,%s,%d,%d)", quads[0], quads[1], quads[2], quads[3], p1, p2))
 	} else {
 		c.WriteMessage(229, fmt.Sprintf("Entering Extended Passive Mode (|||%d|)", p.Port))
