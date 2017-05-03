@@ -11,7 +11,7 @@ help:
 	@echo "  check             to vet and lint"
 	@echo "  build             to create bin directory and build"
 	@echo "  test              to run test"
-	@echo "  run               to run qsftp locally"
+	@echo "  run               to run qsftpd locally"
 	@echo "  integration-test  to run integration test"
 	@echo "  release           to build and release"
 	@echo "  clean             to clean build and test files"
@@ -24,22 +24,22 @@ check: vet lint
 
 .PHONY: vet
 vet:
-	@echo "go tool vet, on qsftp packages"
+	@echo "go tool vet, on qsftpd packages"
 	@go tool vet -all ${DIRS_WITHOUT_VENDOR}
 	@echo "ok"
 
 .PHONY: lint
 lint:
-	@echo "golint, on qsftp packages"
+	@echo "golint, on qsftpd packages"
 	@lint=$$(for pkg in ${PKGS_WITHOUT_VENDOR}; do golint $${pkg}; done); \
 	 if [[ -n $${lint} ]]; then echo "$${lint}"; exit 1; fi
 	@echo "ok"
 
 .PHONY: build
 build:
-	@echo "build qsftp"
+	@echo "build qsftpd"
 	mkdir -p ./bin
-	go build -o ./bin/qsftp .
+	go build -o ./bin/qsftpd .
 	@echo "ok"
 
 .PHONY: test
@@ -50,8 +50,8 @@ test:
 
 .PHONY: run
 run: build
-	@echo "run qsftp"
-	./bin/qsftp -c qsftp.yaml
+	@echo "run qsftpd"
+	./bin/qsftpd -c qsftpd.yaml
 	@echo "ok"
 
 .PHONY: integration-test
@@ -65,20 +65,20 @@ integration-test:
 
 .PHONY: release
 release:
-	@echo "release qsftp"
+	@echo "release qsftpd"
 	mkdir -p ./release
 	@echo "for Linux"
-	GOOS=linux GOARCH=amd64 go build -o ./bin/linux/qsftp .
+	GOOS=linux GOARCH=amd64 go build -o ./bin/linux/qsftpd .
 	mkdir -p ./release
-	tar -C ./bin/linux/ -czf ./release/qsftp-v${VERSION}-linux_amd64.tar.gz qsftp
+	tar -C ./bin/linux/ -czf ./release/qsftpd-v${VERSION}-linux_amd64.tar.gz qsftpd
 	@echo "for macOS"
 	mkdir -p ./bin/linux
-	GOOS=darwin GOARCH=amd64 go build -o ./bin/darwin/qsftp .
-	tar -C ./bin/darwin/ -czf ./release/qsftp-v${VERSION}-darwin_amd64.tar.gz qsftp
+	GOOS=darwin GOARCH=amd64 go build -o ./bin/darwin/qsftpd .
+	tar -C ./bin/darwin/ -czf ./release/qsftpd-v${VERSION}-darwin_amd64.tar.gz qsftpd
 	@echo "for Windows"
 	mkdir -p ./bin/windows
-	GOOS=windows GOARCH=amd64 go build -o ./bin/windows/qsftp.exe .
-	tar -C ./bin/windows/ -czf ./release/qsftp-v${VERSION}-windows_amd64.tar.gz qsftp.exe
+	GOOS=windows GOARCH=amd64 go build -o ./bin/windows/qsftpd.exe .
+	tar -C ./bin/windows/ -czf ./release/qsftpd-v${VERSION}-windows_amd64.tar.gz qsftpd.exe
 	@echo "ok"
 
 .PHONY: clean

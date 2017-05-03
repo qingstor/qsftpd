@@ -11,8 +11,8 @@ import (
 	"github.com/pengsrc/go-shared/convert"
 	"github.com/yunify/qingstor-sdk-go/request/errors"
 	"github.com/yunify/qingstor-sdk-go/service"
-	"github.com/yunify/qsftp/client"
-	"github.com/yunify/qsftp/context"
+	"github.com/yunify/qsftpd/client"
+	"github.com/yunify/qsftpd/context"
 )
 
 // QSDriver stores prefix
@@ -23,7 +23,7 @@ type QSDriver struct {
 // ChangeDirectory changes current directory
 func (d *QSDriver) ChangeDirectory(cc client.Context, directory string) error {
 	directory = removeLeadingSlash(addTrailingSlash(trimPath(directory)))
-	context.Logger.DebugF("Change directory: %s", directory)
+	context.Logger.Debugf("Change directory: %s", directory)
 
 	if directory == "" {
 		return nil
@@ -56,7 +56,7 @@ func (d *QSDriver) ChangeDirectory(cc client.Context, directory string) error {
 // MakeDirectory creates directory
 func (d *QSDriver) MakeDirectory(cc client.Context, directory string) error {
 	directory = removeLeadingSlash(addTrailingSlash(trimPath(directory)))
-	context.Logger.DebugF("Mkdir directory: %s", directory)
+	context.Logger.Debugf("Mkdir directory: %s", directory)
 
 	_, err := context.Bucket.PutObject(directory, &service.PutObjectInput{
 		ContentType: convert.String("application/x-directory"),
@@ -75,7 +75,7 @@ func (d *QSDriver) ListFiles(cc client.Context, dir string) ([]os.FileInfo, erro
 	}
 	dir = removeLeadingSlash(addTrailingSlash(dir))
 
-	context.Logger.DebugF("List files: %s", dir)
+	context.Logger.Debugf("List files: %s", dir)
 
 	infos := []os.FileInfo{}
 
@@ -113,7 +113,7 @@ func (d *QSDriver) ListFiles(cc client.Context, dir string) ([]os.FileInfo, erro
 // OpenFile opens file for read and write
 func (d *QSDriver) OpenFile(cc client.Context, path string, flag int) (client.FileStream, error) {
 	path = removeLeadingSlash(trimPath(path))
-	context.Logger.DebugF("Open file: %s", path)
+	context.Logger.Debugf("Open file: %s", path)
 
 	switch flag {
 	case os.O_RDONLY:
@@ -128,7 +128,7 @@ func (d *QSDriver) OpenFile(cc client.Context, path string, flag int) (client.Fi
 // DeleteFile delete a path
 func (d *QSDriver) DeleteFile(cc client.Context, path string) error {
 	path = removeLeadingSlash(trimPath(path))
-	context.Logger.DebugF("Delete file: %s", path)
+	context.Logger.Debugf("Delete file: %s", path)
 
 	_, err := context.Bucket.DeleteObject(path)
 	if err != nil {
@@ -145,7 +145,7 @@ func (d *QSDriver) DeleteFile(cc client.Context, path string) error {
 // GetFileInfo gets file stats
 func (d *QSDriver) GetFileInfo(cc client.Context, filePath string) (os.FileInfo, error) {
 	filePath = removeLeadingSlash(trimPath(filePath))
-	context.Logger.DebugF("Get file info: %s", filePath)
+	context.Logger.Debugf("Get file info: %s", filePath)
 
 	needTrailingSlash := false
 
@@ -203,8 +203,8 @@ func (d *QSDriver) RenameFile(cc client.Context, from, to string) error {
 	}
 	from = removeLeadingSlash(from)
 	to = removeLeadingSlash(to)
-	context.Logger.DebugF("Rename file from: %s", from)
-	context.Logger.DebugF("Rename file to: %s", to)
+	context.Logger.Debugf("Rename file from: %s", from)
+	context.Logger.Debugf("Rename file to: %s", to)
 
 	needTrailingSlash := false
 

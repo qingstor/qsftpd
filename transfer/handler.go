@@ -1,6 +1,8 @@
 package transfer
 
-import "net"
+import (
+	"net"
+)
 
 // Handler presents active/passive transfer connection handler.
 type Handler interface {

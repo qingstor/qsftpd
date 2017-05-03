@@ -4,7 +4,7 @@ import (
 	"errors"
 	"io"
 
-	"github.com/yunify/qsftp/context"
+	"github.com/yunify/qsftpd/context"
 )
 
 // QSDownloadFile stores ObjectKey and it's Body
@@ -40,6 +40,6 @@ func NewQSDownloadFile(objectKey string) (*QSDownloadFile, error) {
 	if err != nil {
 		return nil, err
 	}
-	context.Logger.DebugF("Open object: %s", objectKey)
+	context.Logger.Debugf("Open object: %s", objectKey)
 	return &QSDownloadFile{ObjectKey: objectKey, Body: output.Body}, nil
 }

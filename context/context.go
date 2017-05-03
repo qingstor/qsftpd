@@ -1,9 +1,9 @@
 package context
 
 import (
+	"github.com/pengsrc/go-shared/check"
 	"github.com/pengsrc/go-shared/logger"
 	"github.com/pengsrc/go-shared/yaml"
-	"github.com/pengsrc/go-utils/check"
 	qsConfig "github.com/yunify/qingstor-sdk-go/config"
 	"github.com/yunify/qingstor-sdk-go/service"
 )

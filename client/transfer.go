@@ -6,9 +6,9 @@ import (
 	"net"
 	"strings"
 
-	"github.com/yunify/qsftp/context"
-	"github.com/yunify/qsftp/transfer"
-	"github.com/yunify/qsftp/utils"
+	"github.com/yunify/qsftpd/context"
+	"github.com/yunify/qsftpd/transfer"
+	"github.com/yunify/qsftpd/utils"
 )
 
 func (c *Handler) handlePASV() {
@@ -39,7 +39,7 @@ func (c *Handler) handlePASV() {
 	}
 
 	if err != nil {
-		context.Logger.ErrorF("Could not listen: %v", err)
+		context.Logger.Errorf("Could not listen: %v", err)
 		return
 	}
 

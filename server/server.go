@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/satori/go.uuid"
-	"github.com/yunify/qsftp/client"
-	"github.com/yunify/qsftp/context"
-	"github.com/yunify/qsftp/driver"
+	"github.com/yunify/qsftpd/client"
+	"github.com/yunify/qsftpd/context"
+	"github.com/yunify/qsftpd/driver"
 )
 
 // FTPServer is where everything is stored.
@@ -30,7 +30,7 @@ func (s *FTPServer) ListenAndServe() error {
 		return err
 	}
 
-	context.Logger.InfoF("Starting...")
+	context.Logger.Infof("Starting...")
 	s.Serve()
 
 	// Note: At this precise time, the clients are still connected. We are just not accepting clients anymore.
@@ -45,11 +45,11 @@ func (s *FTPServer) Listen() error {
 		"%s:%d", context.Settings.ListenHost, context.Settings.ListenPort,
 	))
 	if err != nil {
-		context.Logger.ErrorF("Cannot listen: %v", err)
+		context.Logger.Errorf("Cannot listen: %v", err)
 		return err
 	}
 
-	context.Logger.InfoF("Listening... %v", s.Listener.Addr())
+	context.Logger.Infof("Listening... %v", s.Listener.Addr())
 	return err
 }
 
@@ -59,7 +59,7 @@ func (s *FTPServer) Serve() {
 		connection, err := s.Listener.Accept()
 		if err != nil {
 			if s.Listener != nil {
-				context.Logger.ErrorF("Accept error: %v", err)
+				context.Logger.Errorf("Accept error: %v", err)
 			}
 			break
 		}
@@ -94,8 +94,8 @@ func (s *FTPServer) serveClient(id string, connection net.Conn) {
 	defer s.clientDeparture(id, connection)
 
 	c.WriteMessage(220, "Welcome to QSFTP Server")
-	context.Logger.DebugF("Accept client on: id: %s, IP: %v", id, connection.RemoteAddr())
-	defer context.Logger.DebugF("Goodbye: id: %s, IP: %v", id, connection.RemoteAddr())
+	context.Logger.Debugf("Accept client on: id: %s, IP: %v", id, connection.RemoteAddr())
+	defer context.Logger.Debugf("Goodbye: id: %s, IP: %v", id, connection.RemoteAddr())
 
 	c.HandleCommands()
 }
@@ -110,7 +110,7 @@ func (s *FTPServer) clientArrival(id string, connection net.Conn) error {
 	}
 
 	s.clientCounter++
-	context.Logger.InfoF("FTP Client connected: ftp.connected, id: %s, RemoteAddr: %v, Total: %d", id, connection.RemoteAddr(), s.clientCounter)
+	context.Logger.Infof("FTP Client connected: ftp.connected, id: %s, RemoteAddr: %v, Total: %d", id, connection.RemoteAddr(), s.clientCounter)
 
 	return nil
 }
@@ -121,7 +121,7 @@ func (s *FTPServer) clientDeparture(id string, connection net.Conn) {
 	defer s.connectionsMutex.Unlock()
 
 	s.clientCounter--
-	context.Logger.InfoF("FTP Client disconnected: ftp.disconnected, id: %s, RemoteAddr: %v, Total: %d", id, connection.RemoteAddr(), s.clientCounter)
+	context.Logger.Infof("FTP Client disconnected: ftp.disconnected, id: %s, RemoteAddr: %v, Total: %d", id, connection.RemoteAddr(), s.clientCounter)
 }
 
 // NewFTPServer creates a new FTPServer instance.

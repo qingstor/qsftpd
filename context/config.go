@@ -7,7 +7,7 @@ import (
 
 	"github.com/pengsrc/go-shared/check"
 	"github.com/pengsrc/go-shared/yaml"
-	"github.com/yunify/qsftp/utils"
+	"github.com/yunify/qsftpd/utils"
 )
 
 // A Config stores a configuration of qsftp.

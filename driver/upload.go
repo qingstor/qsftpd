@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/yunify/qingstor-sdk-go/service"
-	"github.com/yunify/qsftp/context"
+	"github.com/yunify/qsftpd/context"
 )
 
 // QSUploadFile stores ObjectKey and it's TempFile
@@ -28,12 +28,12 @@ func (f *QSUploadFile) Read(p []byte) (n int, err error) {
 
 // Close temp file and put an object
 func (f *QSUploadFile) Close() error {
-	defer context.Logger.DebugF("Delete temp file: %s", f.TempFile.Name())
+	defer context.Logger.Debugf("Delete temp file: %s", f.TempFile.Name())
 	defer os.Remove(f.TempFile.Name())
 	defer f.TempFile.Close()
 
-	context.Logger.DebugF("Upload file: %s", f.TempFile.Name())
-	context.Logger.DebugF("Upload file for key: %s", f.ObjectKey)
+	context.Logger.Debugf("Upload file: %s", f.TempFile.Name())
+	context.Logger.Debugf("Upload file for key: %s", f.ObjectKey)
 
 	f.TempFile.Seek(0, 0)
 
@@ -52,6 +52,6 @@ func NewQSUploadFile(objectKey string) (*QSUploadFile, error) {
 	if err != nil {
 		return nil, err
 	}
-	context.Logger.DebugF("Created temp file: %s", file.Name())
+	context.Logger.Debugf("Created temp file: %s", file.Name())
 	return &QSUploadFile{ObjectKey: objectKey, TempFile: file}, nil
 }

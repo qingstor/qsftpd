@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/yunify/qsftp/context"
-	"github.com/yunify/qsftp/transfer"
-	"github.com/yunify/qsftp/utils"
+	"github.com/yunify/qsftpd/context"
+	"github.com/yunify/qsftpd/transfer"
+	"github.com/yunify/qsftpd/utils"
 )
 
 // Handler driver handles the file system access logic.
@@ -50,7 +50,7 @@ func (c *Handler) HandleCommands() {
 
 	for {
 		if c.reader == nil {
-			context.Logger.DebugF("Clean disconnect: ftp.disconnect, ID: %s, Clean: %t", c.id, true)
+			context.Logger.Debugf("Clean disconnect: ftp.disconnect, ID: %s, Clean: %t", c.id, true)
 			return
 		}
 
@@ -58,14 +58,14 @@ func (c *Handler) HandleCommands() {
 
 		if err != nil {
 			if err == io.EOF {
-				context.Logger.DebugF("TCP disconnect: ftp.disconnect, ID: %s, Clean: %t", c.id, false)
+				context.Logger.Debugf("TCP disconnect: ftp.disconnect, ID: %s, Clean: %t", c.id, false)
 			} else {
-				context.Logger.ErrorF("Read error: ftp.read_error, ID: %s, Error: %v", c.id, err)
+				context.Logger.Errorf("Read error: ftp.read_error, ID: %s, Error: %v", c.id, err)
 			}
 			return
 		}
 
-		context.Logger.DebugF("FTP RECV: ftp.cmd_recv, ID: %s, Line: %v", c.id, line)
+		context.Logger.Debugf("FTP RECV: ftp.cmd_recv, ID: %s, Line: %v", c.id, line)
 
 		c.handleCommand(line)
 	}
@@ -80,7 +80,7 @@ func (c *Handler) TransferOpen() (net.Conn, error) {
 	c.WriteMessage(150, "Using transfer connection")
 	conn, err := c.transfer.Open()
 	if err == nil {
-		context.Logger.DebugF("FTP Transfer connection opened: ftp.transfer_open, ID: %s, RemoteAddr: %s, LocalAddr: %s", c.id, conn.RemoteAddr().String(), conn.LocalAddr().String())
+		context.Logger.Debugf("FTP Transfer connection opened: ftp.transfer_open, ID: %s, RemoteAddr: %s, LocalAddr: %s", c.id, conn.RemoteAddr().String(), conn.LocalAddr().String())
 	}
 	return conn, err
 }
@@ -91,7 +91,7 @@ func (c *Handler) TransferClose() {
 		c.WriteMessage(226, "Closing transfer connection")
 		c.transfer.Close()
 		c.transfer = nil
-		context.Logger.DebugF("FTP Transfer connection closed: ftp.transfer_close. ID: %s", c.id)
+		context.Logger.Debugf("FTP Transfer connection closed: ftp.transfer_close. ID: %s", c.id)
 	}
 }
 
@@ -120,7 +120,7 @@ func (c *Handler) handleCommand(line string) {
 	// Let's prepare to recover in case there's a command error.
 	defer func() {
 		if r := recover(); r != nil {
-			context.Logger.ErrorF("Internel error: %v, Trace: %s", r, debug.Stack())
+			context.Logger.Errorf("Internel error: %v, Trace: %s", r, debug.Stack())
 			c.WriteMessage(500, fmt.Sprintf("Internal error: %s", r))
 		}
 	}()
@@ -146,7 +146,7 @@ func (c *Handler) disconnect() {
 }
 
 func (c *Handler) writeLine(line string) {
-	context.Logger.DebugF("FTP SEND: ftp.cmd_send, ID: %s, Line: %s", c.id, line)
+	context.Logger.Debugf("FTP SEND: ftp.cmd_send, ID: %s, Line: %s", c.id, line)
 	c.writer.Write([]byte(line))
 	c.writer.Write([]byte("\r\n"))
 	c.writer.Flush()

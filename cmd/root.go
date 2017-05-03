@@ -7,8 +7,8 @@ import (
 
 	"github.com/pengsrc/go-shared/check"
 	"github.com/spf13/cobra"
-	"github.com/yunify/qsftp/context"
-	"github.com/yunify/qsftp/server"
+	"github.com/yunify/qsftpd/context"
+	"github.com/yunify/qsftpd/server"
 )
 
 var (
@@ -18,7 +18,7 @@ var (
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "qsftp",
+	Use:   "qsftpd",
 	Short: "A FTP server that persists all data to QingStor Object Storage.",
 	Long:  "A FTP server that persists all data to QingStor Object Storage.",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -28,7 +28,7 @@ var RootCmd = &cobra.Command{
 		go signalHandler(ftpServer)
 
 		err := ftpServer.ListenAndServe()
-		check.ErrorForExit("qsftp", err)
+		check.ErrorForExit("qsftpd", err)
 	},
 }
 
@@ -36,7 +36,7 @@ var RootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
-		check.ErrorForExit("qsftp", err)
+		check.ErrorForExit("qsftpd", err)
 		os.Exit(-1)
 	}
 }
@@ -44,15 +44,15 @@ func Execute() {
 func init() {
 	curConfig = context.NewConfig()
 
-	RootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "qsftp.yaml", "Specify config file")
+	RootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "qsftpd.yaml", "Specify config file")
 }
 
 func reloadConfig() {
 	err := curConfig.LoadConfigFromFilepath(cfgFile)
-	check.ErrorForExit("qsftp", err)
+	check.ErrorForExit("qsftpd", err)
 
 	err = context.SetupContext(curConfig)
-	check.ErrorForExit("qsftp", err)
+	check.ErrorForExit("qsftpd", err)
 }
 
 func signalHandler(ftpServer *server.FTPServer) {
