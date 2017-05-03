@@ -14,7 +14,7 @@
 // | limitations under the License.
 // +-------------------------------------------------------------------------
 
-package main
+package constants
 
-// Version number string.
-const Version = "0.0.5"
+// Name is the application name.
+const Name = "qsftpd"
