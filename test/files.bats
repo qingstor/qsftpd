@@ -20,7 +20,7 @@
     temp=$(mktemp)
     dd if=/dev/zero of=${temp} bs=1048576 count=1
     cd $(dirname ${temp})
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 put $(basename ${temp}) qsftp.bin
 EOS
@@ -30,7 +30,7 @@ EOS
 }
 
 @test "List file" {
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 ls
 EOS
@@ -40,7 +40,7 @@ EOS
 
 @test "Get file" {
     temp=$(mktemp)
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 get qsftp.bin ${temp}
 EOS
@@ -50,7 +50,7 @@ EOS
 }
 
 @test "Delete file" {
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 del qsftp.bin
 EOS

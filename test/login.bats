@@ -17,7 +17,7 @@
 #!/usr/bin/env bats
 
 @test "Login as anonymous user" {
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 bye
 EOS
@@ -26,7 +26,7 @@ EOS
 }
 
 @test "Login as unknown user" {
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user unknown unknown
 bye
 EOS

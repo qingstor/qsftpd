@@ -87,8 +87,8 @@ func (c *Config) Check() error {
 		c.ListenHost = "0.0.0.0"
 	}
 	if c.ListenPort == 0 {
-		// For the default value (0), We take the default port (2121).
-		c.ListenPort = 2121
+		// For the default value (0), We take the default port (21).
+		c.ListenPort = 21
 	} else if c.ListenPort == -1 {
 		// For the automatic value, We let the system decide (0).
 		c.ListenPort = 0

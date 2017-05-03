@@ -17,7 +17,7 @@
 #!/usr/bin/env bats
 
 @test "Not supported command" {
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 account aaa
 EOS

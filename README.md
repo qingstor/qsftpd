@@ -29,7 +29,7 @@ Run the FTP server.
 
 ``` bash
 $ qsftpd -c path/to/your/config.yaml
-[2017-04-12T03:24:40.541Z #2527]  INFO -- : Listening... 127.0.0.1:2121
+[2017-04-12T03:24:40.541Z #2527]  INFO -- : Listening... 127.0.0.1:21
 [2017-04-12T03:24:40.541Z #2527]  INFO -- : Starting...
 [2017-04-12T03:24:49.330Z #2527]  INFO -- : FTP Client connected: ftp.connected, id: 76e209d6a89448279e947a7babe0097d, RemoteAddr: 127.0.0.1:51788, Total: 1
 ......

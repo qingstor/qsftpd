@@ -17,7 +17,7 @@
 #!/usr/bin/env bats
 
 @test "Create directory" {
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 mkdir qsftp-test
 mkdir qsftp-test/nested
@@ -28,7 +28,7 @@ EOS
 }
 
 @test "List directory" {
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 ls qsftp-test
 EOS
@@ -37,7 +37,7 @@ EOS
 }
 
 @test "Change directory" {
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 cd qsftp-test
 ls
@@ -48,7 +48,7 @@ EOS
 }
 
 @test "Print directory" {
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 cd qsftp-test
 pwd
@@ -58,7 +58,7 @@ EOS
 }
 
 @test "Remove directory" {
-    run ftp -vnp 127.0.0.1 2121 <<EOS
+    run ftp -vnp 127.0.0.1 <<EOS
 user anonymous anonymous
 rmdir qsftp-test/nested
 rmdir qsftp-test
