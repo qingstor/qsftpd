@@ -1,37 +1,24 @@
-hash: da5a0b7772c44312a9be724b61dd21426d415f39598c541d5ea0a7beaa99bed7
-updated: 2017-04-18T11:25:51.530153155+08:00
+hash: f122177a5f7b24cac41c44cb60e9c79a4473e0e1fa7bc4309cbd34639df5a91e
+updated: 2017-05-03T14:08:18.931874097+08:00
 imports:
-- name: github.com/davecgh/go-spew
-  version: 346938d642f2ec3594ed81d874461961cd0faa76
-- name: github.com/fsnotify/fsnotify
-  version: 629574ca2a5df945712d3079857300b5e4da0236
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
 - name: github.com/pengsrc/go-shared
-  version: e5554a5c0880fd52ba62e92b531ce7b9312b073c
+  version: 454950d6a0782c34427d4f29b46c6bf447256f20
   subpackages:
   - check
   - convert
   - logger
-  - yaml
-- name: github.com/pengsrc/go-utils
-  version: e5554a5c0880fd52ba62e92b531ce7b9312b073c
-  subpackages:
-  - check
-  - convert
   - reopen
-- name: github.com/pmezard/go-difflib
-  version: 792786c7400a136282c1664665ae0a8db921c6c2
+  - yaml
 - name: github.com/satori/go.uuid
   version: 879c5887cd475cd7864858769793b2ceb0d44feb
 - name: github.com/Sirupsen/logrus
   version: d26492970760ca5d33129d2d799e34be5c4782eb
 - name: github.com/spf13/cobra
-  version: 5deb57bbca49eb370538fc295ba4b2988f9f5e09
+  version: 8f0203be891287870100e4af46262cdf4a4261d1
 - name: github.com/spf13/pflag
   version: 9a906f17374922ed0f74e1b2f593d3723f2ffb00
-- name: github.com/stretchr/testify
-  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
 - name: github.com/yunify/qingstor-sdk-go
   version: 4a6e13e0287080deb90b26b1da874396c78e7dc9
   subpackages:
@@ -53,4 +40,16 @@ imports:
 - name: gopkg.in/yaml.v2
   version: a5b47d31c556af34a302ce5d659e6fea44d90de0
   repo: https://github.com/go-yaml/yaml.git
-testImports: []
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 346938d642f2ec3594ed81d874461961cd0faa76
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: 792786c7400a136282c1664665ae0a8db921c6c2
+  subpackages:
+  - difflib
+- name: github.com/stretchr/testify
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  subpackages:
+  - assert
