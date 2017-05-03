@@ -63,6 +63,19 @@ Currently, the commands listed below are not supported. You can submit issue to 
 
 ___Note:__ All FTP commands can be found here ([https://tools.ietf.org/html/rfc5797](https://tools.ietf.org/html/rfc5797))._
 
+## References
+
+- [QingStor Documentation](https://docs.qingcloud.com/qingstor/index.html)
+- [QingStor Guide](https://docs.qingcloud.com/qingstor/guide/index.html)
+- [QingStor APIs](https://docs.qingcloud.com/qingstor/api/index.html)
+- [FTP Command and Extension Registry](https://tools.ietf.org/html/rfc5797)
+
+## Statement
+
+This project is highly inspired by [`fclairamb/ftpserver`](https://github.com/fclairamb/ftpserver) which is a fork of [`andrewarrow/paradise_ftp`](https://github.com/andrewarrow/paradise_ftp).
+
+Thanks to [Andrew Arrow](andrew@0x7a69.com) and [Florent Clairambault](florent@clairambault.fr), and the original license can be found [here](./license.txt).
+
 ## LICENSE
 
 The Apache License (Version 2.0, January 2004).
