@@ -16,6 +16,8 @@ listen_host: 127.0.0.1
 listen_port: 21
 public_host: 127.0.0.1
 max_connections: 128
+start_port: 6000
+end_port: 7000
 
 # Authentication settings
 # Allowed anonymous login by default.

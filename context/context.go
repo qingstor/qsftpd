@@ -50,8 +50,8 @@ func SetupContext(c *Config) error {
 		PublicHost:     c.PublicHost,
 		MaxConnections: c.MaxConnections,
 		DataPortRange: &PortRange{
-			Start: 6000,
-			End:   7000,
+			Start: c.StartPort,
+			End:   c.EndPort,
 		},
 		Users: c.Users,
 	}
