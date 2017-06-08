@@ -44,7 +44,7 @@ type Handler struct {
 	connectedAt   time.Time        // Date of connection
 	ctxRnfr       string           // Rename from
 	ctxRest       int64            // Restart point
-	transfer      transfer.Handler // Transfer connection (only passive is implemented at this stage)
+	transfer      transfer.Handler // Transfer connection
 	transferTLS   bool             // Use TLS for transfer connection
 	driver        Driver           // Client handling driver
 	driverFactory func() Driver    // Factory to create driver
@@ -90,14 +90,17 @@ func (c *Handler) HandleCommands() {
 // TransferOpen opens transfer with handler
 func (c *Handler) TransferOpen() (net.Conn, error) {
 	if c.transfer == nil {
-		c.WriteMessage(550, "No passive connection declared")
-		return nil, errors.New("No passive connection declared")
+		c.WriteMessage(550, "No connection declared")
+		return nil, errors.New("No connection declared")
 	}
 	c.WriteMessage(150, "Using transfer connection")
 	conn, err := c.transfer.Open()
 	if err == nil {
 		context.Logger.Debugf("FTP Transfer connection opened: ftp.transfer_open, ID: %s, RemoteAddr: %s, LocalAddr: %s", c.id, conn.RemoteAddr().String(), conn.LocalAddr().String())
+	} else {
+		context.Logger.Errorf("FTP Transfer connection open failed: %v: ", err)
 	}
+
 	return conn, err
 }
 
