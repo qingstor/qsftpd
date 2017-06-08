@@ -44,6 +44,7 @@ type Config struct {
 	EndPort        int    `yaml:"end_port"`
 	MaxConnections int    `yaml:"max_connections"`
 	BucketName     string `yaml:"bucket_name"`
+	LogLevel       string `yaml:"log_level"`
 	Zone           string `yaml:"zone"`
 
 	Users map[string]string `yaml:"users"`
@@ -112,6 +113,9 @@ func (c *Config) Check() error {
 	}
 	if c.Zone == "" {
 		return errors.New("Bucket zone not specified")
+	}
+	if c.LogLevel == "" {
+		c.LogLevel = "debug"
 	}
 	if c.Users == nil {
 		c.Users = make(map[string]string)
