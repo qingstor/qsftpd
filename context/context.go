@@ -38,7 +38,7 @@ func SetupContext(c *Config) error {
 	var err error
 
 	// Setup logger.
-	Logger, err = logger.NewTerminalLogger("debug")
+	Logger, err = logger.NewTerminalLogger(c.LogLevel)
 	if err != nil {
 		return err
 	}
