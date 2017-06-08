@@ -17,6 +17,8 @@ Usage:
 
 Flags:
   -c, --config string   Specify config file (default "qsftpd.yaml")
+  -h, --help            help for qsftpd
+  -v, --version         Show version
 ```
 
 ### Create configuration
