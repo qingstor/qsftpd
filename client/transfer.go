@@ -28,7 +28,6 @@ import (
 )
 
 func (c *Handler) handlePASV() {
-	addr, _ := net.ResolveTCPAddr("tcp", ":0")
 	var tcpListener *net.TCPListener
 	var err error
 
@@ -36,26 +35,24 @@ func (c *Handler) handlePASV() {
 	listenHost := context.Settings.ListenHost
 	publicHost := context.Settings.PublicHost
 
-	if portRange != nil {
-		for start := portRange.Start; start < portRange.End; start++ {
-			port := portRange.Start + rand.Intn(portRange.End-portRange.Start)
-			localAddr, err := net.ResolveTCPAddr("tcp", fmt.Sprintf("%s:%d", listenHost, port))
-			if err != nil {
-				continue
-			}
-
-			tcpListener, err = net.ListenTCP("tcp", localAddr)
-			if err == nil {
-				break
-			}
+	for start := portRange.Start; start < portRange.End; start++ {
+		port := portRange.Start + rand.Intn(portRange.End-portRange.Start)
+		localAddr, err := net.ResolveTCPAddr("tcp", fmt.Sprintf("%s:%d", listenHost, port))
+		if err != nil {
+			continue
 		}
 
-	} else {
-		tcpListener, err = net.ListenTCP("tcp", addr)
+		tcpListener, err = net.ListenTCP("tcp", localAddr)
+		if err == nil {
+			break
+		} else {
+			continue
+		}
 	}
 
-	if err != nil {
+	if err != nil || tcpListener == nil {
 		context.Logger.Errorf("Could not listen: %v", err)
+		c.WriteMessage(425, "Can't open data connection.")
 		return
 	}
 
