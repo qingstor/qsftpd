@@ -8,7 +8,7 @@ import:
   version: v1.1.0
 # QingStor
 - package: github.com/yunify/qingstor-sdk-go
-  version: v2.2.4
+  version: v2.2.5
 # Command line
 - package: github.com/spf13/cobra
   version: 8f0203be891287870100e4af46262cdf4a4261d1
