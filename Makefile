@@ -69,16 +69,21 @@ release:
 	mkdir -p ./release
 	@echo "for Linux"
 	GOOS=linux GOARCH=amd64 go build -o ./bin/linux/qsftpd .
-	mkdir -p ./release
+	GOOS=linux GOARCH=386 go build -o ./bin/linux/qsftpd_386 .
 	tar -C ./bin/linux/ -czf ./release/qsftpd-v${VERSION}-linux_amd64.tar.gz qsftpd
+	tar -C ./bin/linux/ -czf ./release/qsftpd-v${VERSION}-linux_386.tar.gz qsftpd_386
 	@echo "for macOS"
 	mkdir -p ./bin/linux
 	GOOS=darwin GOARCH=amd64 go build -o ./bin/darwin/qsftpd .
+	GOOS=darwin GOARCH=386 go build -o ./bin/darwin/qsftpd_386 .
 	tar -C ./bin/darwin/ -czf ./release/qsftpd-v${VERSION}-darwin_amd64.tar.gz qsftpd
+	tar -C ./bin/darwin/ -czf ./release/qsftpd-v${VERSION}-darwin_386.tar.gz qsftpd_386
 	@echo "for Windows"
 	mkdir -p ./bin/windows
 	GOOS=windows GOARCH=amd64 go build -o ./bin/windows/qsftpd.exe .
-	tar -C ./bin/windows/ -czf ./release/qsftpd-v${VERSION}-windows_amd64.tar.gz qsftpd.exe
+	GOOS=windows GOARCH=386 go build -o ./bin/windows/qsftpd_386.exe .
+	zip -j "release/qsftpd-v${VERSION}-windows_amd64.zip" bin/windows/qsftpd.exe
+	zip -j "release/qsftpd-v${VERSION}-windows_386.zip" bin/windows/qsftpd_386.exe
 	@echo "ok"
 
 .PHONY: clean
