@@ -270,6 +270,10 @@ func removeLeadingSlash(path string) string {
 		if strings.Index(path, "/") == 0 {
 			return path[1:]
 		}
+		// Remove "D:\" and replace all "\" in filepath
+		if strings.Index(path, "\\") == 2 {
+			return strings.Replace(path[3:],"\\","/", -1)
+		}
 	}
 	return path
 }
