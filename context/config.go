@@ -111,9 +111,6 @@ func (c *Config) Check() error {
 	if c.BucketName == "" {
 		return errors.New("Bucket name not specified")
 	}
-	if c.Zone == "" {
-		return errors.New("Bucket zone not specified")
-	}
 	if c.LogLevel == "" {
 		c.LogLevel = "debug"
 	}
