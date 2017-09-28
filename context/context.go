@@ -17,6 +17,10 @@
 package context
 
 import (
+	"fmt"
+	"net/http"
+	"strings"
+
 	"github.com/pengsrc/go-shared/check"
 	"github.com/pengsrc/go-shared/logger"
 	"github.com/pengsrc/go-shared/yaml"
@@ -32,6 +36,25 @@ var (
 	// Bucket is the global Bucket for qsftp
 	Bucket *service.Bucket
 )
+
+//GetZone gets the zone from global
+func GetZone(c *Config) (string, error) {
+	url := fmt.Sprintf("%s://%s.%s:%d", c.QingStor.Protocol,
+					    c.BucketName,
+					    c.QingStor.Host,
+					    c.QingStor.Port)
+
+	response, err := http.Head(url)
+	check.ErrorForExit("Request error", err)
+	if(err != nil) {
+		return "", err
+	}
+
+	//URL for example: https://bucket.zone.example.com
+	newURL := response.Request.URL.String()
+
+	return strings.Split(newURL, ".")[1], nil
+}
 
 // SetupContext creates the server context.
 func SetupContext(c *Config) error {
@@ -71,7 +94,14 @@ func SetupContext(c *Config) error {
 	qsService, err := service.Init(curQingStorConfig)
 	check.ErrorForExit("Init QingStor config error", err)
 
-	Bucket, err = qsService.Bucket(c.BucketName, c.Zone)
+	zone := c.Zone
+
+	if zone == "" {
+		zone, err = GetZone(c)
+		check.ErrorForExit("Get zone error", err)
+	}
+
+	Bucket, err = qsService.Bucket(c.BucketName, zone)
 	check.ErrorForExit("Create QingStor bucket error", err)
 
 	return nil
