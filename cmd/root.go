@@ -77,6 +77,7 @@ func loadConfig() {
 	check.ErrorForExit(constants.Name, err)
 
 	err = context.SetupContext(currentConfig)
+	context.Logger.Infof("Port Range: %d ~ %d", currentConfig.StartPort, currentConfig.EndPort)
 	check.ErrorForExit(constants.Name, err)
 }
 

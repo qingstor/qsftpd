@@ -134,8 +134,6 @@ func (d *QSDriver) OpenFile(cc client.Context, path string, flag int) (client.Fi
 	switch flag {
 	case os.O_RDONLY:
 		return NewQSDownloadFile(path)
-	case os.O_WRONLY:
-		return NewQSUploadFile(path)
 	}
 
 	return nil, fmt.Errorf("Failed to open path: %s", path)
@@ -272,7 +270,7 @@ func removeLeadingSlash(path string) string {
 		}
 		// Remove "D:\" and replace all "\" in filepath
 		if strings.Index(path, "\\") == 2 {
-			return strings.Replace(path[3:],"\\","/", -1)
+			return strings.Replace(path[3:], "\\", "/", -1)
 		}
 	}
 	return path

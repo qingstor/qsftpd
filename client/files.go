@@ -23,6 +23,9 @@ import (
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/yunify/qingstor-sdk-go/client/upload"
+	"github.com/yunify/qsftpd/context"
 )
 
 func (c *Handler) handleSTOR() {
@@ -98,12 +101,18 @@ func (c *Handler) handleCHMOD(params string) {
 }
 
 func (c *Handler) storeOrAppend(conn net.Conn, name string, append bool) (int64, error) {
-	flag := os.O_WRONLY
-	if append {
-		flag |= os.O_APPEND
+
+	if !append {
+		defaultPartSize := 1024 * 1024 * 4
+		uploader := upload.Init(context.Bucket, defaultPartSize)
+		err := uploader.Upload(conn, name)
+		if err != nil {
+			return -1, err
+		}
+		return 0, nil
 	}
 
-	file, err := c.driver.OpenFile(c, name, flag)
+	file, err := c.driver.OpenFile(c, name, os.O_WRONLY|os.O_APPEND)
 
 	if err != nil {
 		return 0, err
