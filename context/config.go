@@ -22,7 +22,8 @@ import (
 	"strings"
 
 	"github.com/pengsrc/go-shared/check"
-	"github.com/pengsrc/go-shared/yaml"
+	"gopkg.in/yaml.v2"
+
 	"github.com/yunify/qsftpd/utils"
 )
 
@@ -72,7 +73,7 @@ func (c *Config) LoadConfigFromFilepath(p string) error {
 // It returns error if yaml decode failed.
 func (c *Config) LoadConfigFromContent(content []byte) error {
 	d := NewConfig()
-	_, err := yaml.Decode(content, d)
+	err := yaml.Unmarshal(content, d)
 
 	check.ErrorForExit("Config parse error: ", err)
 
@@ -109,7 +110,7 @@ func (c *Config) Check() error {
 		c.MaxConnections = 10000
 	}
 	if c.BucketName == "" {
-		return errors.New("Bucket name not specified")
+		return errors.New("bucket name not specified")
 	}
 	if c.LogLevel == "" {
 		c.LogLevel = "debug"

@@ -1,27 +1,24 @@
-hash: 779e6de2a1d45d869a952c73a83cf4de879abe7a34053e57eec195b59935729c
-updated: 2017-07-21T02:00:10.66465988+08:00
+hash: a7aab81579c549479125048b9d69af3aaed49f83bfcf91a2ce73f660ec936586
+updated: 2018-05-10T11:54:20.118209+08:00
 imports:
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
 - name: github.com/pengsrc/go-shared
-  version: 454950d6a0782c34427d4f29b46c6bf447256f20
+  version: db9bcfc423552eef790d989bb81ef055d0d26286
   subpackages:
+  - buffer
   - check
   - convert
-  - json
-  - logger
+  - log
   - reopen
-  - yaml
 - name: github.com/satori/go.uuid
   version: 879c5887cd475cd7864858769793b2ceb0d44feb
-- name: github.com/Sirupsen/logrus
-  version: d26492970760ca5d33129d2d799e34be5c4782eb
 - name: github.com/spf13/cobra
   version: 8f0203be891287870100e4af46262cdf4a4261d1
 - name: github.com/spf13/pflag
   version: 9a906f17374922ed0f74e1b2f593d3723f2ffb00
 - name: github.com/yunify/qingstor-sdk-go
-  version: 26f2cc6f249f4c2a08ed89f1d7d566a463c1dfc2
+  version: 9e88dc1b83728e1462fd74bb61b0f5e28ac95bb6
   subpackages:
   - config
   - logger
@@ -33,21 +30,16 @@ imports:
   - request/unpacker
   - service
   - utils
-- name: golang.org/x/sys
-  version: f3918c30c5c2cb527c0b071a27c35120a6c0719a
-  repo: https://github.com/golang/sys.git
-  subpackages:
-  - unix
 - name: gopkg.in/yaml.v2
-  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
+  version: 287cf08546ab5e7e37d55a84f7ed3fd1db036de5
   repo: https://github.com/go-yaml/yaml.git
 testImports:
 - name: github.com/davecgh/go-spew
-  version: 346938d642f2ec3594ed81d874461961cd0faa76
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
   subpackages:
   - spew
 - name: github.com/pmezard/go-difflib
-  version: 792786c7400a136282c1664665ae0a8db921c6c2
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
   subpackages:
   - difflib
 - name: github.com/stretchr/testify
