@@ -1,5 +1,5 @@
-hash: a7aab81579c549479125048b9d69af3aaed49f83bfcf91a2ce73f660ec936586
-updated: 2018-05-10T11:54:20.118209+08:00
+hash: 5ca24ee52d9461d32fc099fbb2030d2185950cc14086a981314501fcc13f882c
+updated: 2018-05-10T12:05:49.902868+08:00
 imports:
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
@@ -18,7 +18,7 @@ imports:
 - name: github.com/spf13/pflag
   version: 9a906f17374922ed0f74e1b2f593d3723f2ffb00
 - name: github.com/yunify/qingstor-sdk-go
-  version: 9e88dc1b83728e1462fd74bb61b0f5e28ac95bb6
+  version: 859d5ec466b00aa7cfd62d663c6ae1a48f774544
   subpackages:
   - config
   - logger
