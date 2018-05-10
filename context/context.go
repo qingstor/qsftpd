@@ -21,16 +21,17 @@ import (
 	"net/http"
 	"strings"
 
+	"gopkg.in/yaml.v2"
 	"github.com/pengsrc/go-shared/check"
-	"github.com/pengsrc/go-shared/logger"
-	"github.com/pengsrc/go-shared/yaml"
+	"github.com/pengsrc/go-shared/log"
+
 	qsConfig "github.com/yunify/qingstor-sdk-go/config"
 	"github.com/yunify/qingstor-sdk-go/service"
 )
 
 var (
 	// Logger is the global logger for qsftp
-	Logger *logger.Logger
+	Logger *log.ContextFreeLogger
 	// Settings is the global settings for qsftp
 	Settings *ServerSettings
 	// Bucket is the global Bucket for qsftp
@@ -40,13 +41,13 @@ var (
 //GetZone gets the zone from global
 func GetZone(c *Config) (string, error) {
 	url := fmt.Sprintf("%s://%s.%s:%d", c.QingStor.Protocol,
-					    c.BucketName,
-					    c.QingStor.Host,
-					    c.QingStor.Port)
+		c.BucketName,
+		c.QingStor.Host,
+		c.QingStor.Port)
 
 	response, err := http.Head(url)
 	check.ErrorForExit("Request error", err)
-	if(err != nil) {
+	if err != nil {
 		return "", err
 	}
 
@@ -61,10 +62,11 @@ func SetupContext(c *Config) error {
 	var err error
 
 	// Setup logger.
-	Logger, err = logger.NewTerminalLogger(c.LogLevel)
+	l, err := log.NewTerminalLogger(c.LogLevel)
 	if err != nil {
 		return err
 	}
+	Logger = log.NewContextFreeLogger(l)
 
 	// Setup settings.
 	Settings = &ServerSettings{
@@ -85,7 +87,7 @@ func SetupContext(c *Config) error {
 		return err
 	}
 
-	curData, err := yaml.Encode(c.QingStor)
+	curData, err := yaml.Marshal(c.QingStor)
 	check.ErrorForExit("QingStor service settings encode error", err)
 
 	err = curQingStorConfig.LoadConfigFromContent(curData)
