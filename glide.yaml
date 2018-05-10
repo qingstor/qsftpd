@@ -20,4 +20,4 @@ import:
 
 # QingStor
 - package: github.com/yunify/qingstor-sdk-go
-  version: v2.2.12
+  version: 859d5ec466b00aa7cfd62d663c6ae1a48f774544
