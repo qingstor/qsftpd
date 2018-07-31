@@ -95,34 +95,41 @@ func (d *QSDriver) ListFiles(cc client.Context, dir string) ([]os.FileInfo, erro
 
 	infos := []os.FileInfo{}
 
-	output, err := context.Bucket.ListObjects(&service.ListObjectsInput{
-		Prefix:    convert.String(dir),
-		Delimiter: convert.String("/"),
-	})
-	if err != nil {
-		return infos, err
-	}
+	marker := convert.String("")
+	for {
+		output, err := context.Bucket.ListObjects(&service.ListObjectsInput{
+			Prefix:    convert.String(dir),
+			Delimiter: convert.String("/"),
+			Marker:    marker,
+		})
+		if err != nil {
+			return infos, err
+		}
 
-	for _, key := range output.Keys {
-		if service.StringValue(key.Key) != dir {
+		for _, key := range output.Keys {
+			if service.StringValue(key.Key) != dir {
+				infos = append(infos, &QSObject{
+					ObjectName:  trimPath(path.Base(service.StringValue(key.Key))),
+					ObjectSize:  convert.Int64Value(key.Size),
+					CreatedTime: convert.TimeValue(key.Created),
+					IsDirectory: false,
+				})
+			}
+		}
+
+		for _, prefix := range output.CommonPrefixes {
 			infos = append(infos, &QSObject{
-				ObjectName:  trimPath(path.Base(service.StringValue(key.Key))),
-				ObjectSize:  convert.Int64Value(key.Size),
-				CreatedTime: convert.TimeValue(key.Created),
-				IsDirectory: false,
+				ObjectName:  trimPath(path.Base(service.StringValue(prefix))),
+				ObjectSize:  int64(0),
+				CreatedTime: time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC),
+				IsDirectory: true,
 			})
 		}
+		if convert.StringValue(output.NextMarker) == "" {
+			break
+		}
+		marker = output.NextMarker
 	}
-
-	for _, prefix := range output.CommonPrefixes {
-		infos = append(infos, &QSObject{
-			ObjectName:  trimPath(path.Base(service.StringValue(prefix))),
-			ObjectSize:  int64(0),
-			CreatedTime: time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC),
-			IsDirectory: true,
-		})
-	}
-
 	return infos, nil
 }
 
@@ -272,7 +279,7 @@ func removeLeadingSlash(path string) string {
 		}
 		// Remove "D:\" and replace all "\" in filepath
 		if strings.Index(path, "\\") == 2 {
-			return strings.Replace(path[3:],"\\","/", -1)
+			return strings.Replace(path[3:], "\\", "/", -1)
 		}
 	}
 	return path
