@@ -70,6 +70,16 @@ func init() {
 	commandsMap["MKD"] = &CommandDescription{Fn: (*Handler).handleMKD}
 	commandsMap["RMD"] = &CommandDescription{Fn: (*Handler).handleRMD}
 
+	// XMKD, XRMD, XPWD, XCUP
+	// Implementation note:  Deployed FTP clients still make use of the
+	// deprecated commands and most FTP servers support them as aliases
+	// for the standard commands.
+	// ref: https://tools.ietf.org/html/rfc5797
+	commandsMap["XMKD"] = &CommandDescription{Fn: (*Handler).handleMKD}
+	commandsMap["XRMD"] = &CommandDescription{Fn: (*Handler).handleRMD}
+	commandsMap["XPWD"] = &CommandDescription{Fn: (*Handler).handlePWD}
+	commandsMap["XCUP"] = &CommandDescription{Fn: (*Handler).handleCWD}
+
 	// Connection handling.
 	commandsMap["TYPE"] = &CommandDescription{Fn: (*Handler).handleTYPE}
 	commandsMap["PASV"] = &CommandDescription{Fn: (*Handler).handlePASV}
