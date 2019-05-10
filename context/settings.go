@@ -23,6 +23,7 @@ type ServerSettings struct {
 	PublicHost     string     // Public IP to expose (only an IP address is accepted at this stage)
 	MaxConnections int        // Max number of connections to accept
 	DataPortRange  *PortRange // Port Range for data connections. Random one will be used if not specified
+	CachePath      string     // Cache path for store the file cache
 	Users          map[string]string
 }
 

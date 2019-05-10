@@ -64,7 +64,7 @@ func (f *QSUploadFile) Seek(offset int64, whence int) (int64, error) {
 
 // NewQSUploadFile creates a QSUploadFile struct
 func NewQSUploadFile(objectKey string) (*QSUploadFile, error) {
-	file, err := ioutil.TempFile("", "qsftp-")
+	file, err := ioutil.TempFile(context.Settings.CachePath, "qsftp-")
 	if err != nil {
 		return nil, err
 	}

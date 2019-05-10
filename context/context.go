@@ -78,7 +78,8 @@ func SetupContext(c *Config) error {
 			Start: c.StartPort,
 			End:   c.EndPort,
 		},
-		Users: c.Users,
+		CachePath: c.CachePath,
+		Users:     c.Users,
 	}
 
 	// Setup bucket.

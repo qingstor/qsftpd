@@ -19,6 +19,7 @@ max_connections: 128
 start_port: 6000
 end_port: 7000
 log_level: error
+cache_path: /var/cache/qsftpd
 
 # Authentication settings
 # Allowed anonymous login by default.

@@ -47,6 +47,7 @@ type Config struct {
 	BucketName     string `yaml:"bucket_name"`
 	LogLevel       string `yaml:"log_level"`
 	Zone           string `yaml:"zone"`
+	CachePath      string `yaml:"cache_path"`
 
 	Users map[string]string `yaml:"users"`
 }
@@ -86,7 +87,6 @@ func (c *Config) LoadConfigFromContent(content []byte) error {
 
 // Check checks the configuration.
 func (c *Config) Check() error {
-
 	if c.ListenHost == "" {
 		c.ListenHost = "0.0.0.0"
 	}
@@ -114,6 +114,9 @@ func (c *Config) Check() error {
 	}
 	if c.LogLevel == "" {
 		c.LogLevel = "debug"
+	}
+	if c.CachePath == "" {
+		return errors.New("cache path not specified")
 	}
 	if c.Users == nil {
 		c.Users = make(map[string]string)
