@@ -21,10 +21,11 @@ import (
 	"net/http"
 	"strings"
 
-	"gopkg.in/yaml.v2"
 	"github.com/pengsrc/go-shared/check"
 	"github.com/pengsrc/go-shared/log"
+	"gopkg.in/yaml.v2"
 
+	"github.com/yunify/qsftpd/utils"
 	qsConfig "github.com/yunify/qingstor-sdk-go/config"
 	"github.com/yunify/qingstor-sdk-go/service"
 )
@@ -80,6 +81,12 @@ func SetupContext(c *Config) error {
 		},
 		CachePath: c.CachePath,
 		Users:     c.Users,
+	}
+
+	// Clean the cache path every time qsftpd start.
+	err = utils.RemoveContents(c.CachePath)
+	if err != nil {
+		return err
 	}
 
 	// Setup bucket.

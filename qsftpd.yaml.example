@@ -19,6 +19,7 @@ max_connections: 128
 start_port: 6000
 end_port: 7000
 log_level: error
+# !!! qsftpd will clean the cache_path every time starts
 cache_path: /var/cache/qsftpd
 
 # Authentication settings

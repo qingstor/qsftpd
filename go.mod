@@ -3,6 +3,7 @@ module github.com/yunify/qsftpd
 go 1.12
 
 require (
+	github.com/magiconair/properties v1.8.0
 	github.com/pengsrc/go-shared v0.0.0-20180504052330-db9bcfc42355
 	github.com/satori/go.uuid v1.2.0
 	github.com/spf13/cobra v0.0.4-0.20190321000552-67fc4837d267
