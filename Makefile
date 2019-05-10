@@ -24,8 +24,8 @@ check: vet lint
 
 .PHONY: vet
 vet:
-	@echo "go tool vet, on qsftpd packages"
-	@go tool vet -all ${DIRS_WITHOUT_VENDOR}
+	@echo "go vet, on qsftpd packages"
+	@go vet -all ${PKGS_WITHOUT_VENDOR}
 	@echo "ok"
 
 .PHONY: lint
@@ -36,7 +36,7 @@ lint:
 	@echo "ok"
 
 .PHONY: build
-build:
+build: check
 	@echo "build qsftpd"
 	mkdir -p ./bin
 	go build -o ./bin/qsftpd .

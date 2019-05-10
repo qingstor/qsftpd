@@ -1,19 +1,17 @@
-sudo: required
-
 language: go
+
 go:
-  - "1.9"
-  - "1.10"
-  - "1.11"
+  - "1.12"
+  - "master"
+
+env:
+  - GO111MODULE=on
 
 install:
   - mkdir -p $GOPATH/bin
-  - curl https://glide.sh/get | sh
-  - go get -v github.com/golang/lint/golint
-  - glide install
+  - go get -u golang.org/x/lint
 
 script:
   - make check
   - make build
   - make test
-  - make release
