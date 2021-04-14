@@ -45,26 +45,6 @@ func (d *QSDriver) ChangeDirectory(cc client.Context, directory string) error {
 		return nil
 	}
 
-	_, err := context.Bucket.HeadObject(directory, nil)
-	if err != nil {
-		value, ok := err.(*errors.QingStorError)
-		if !ok && value.StatusCode != 404 {
-			return err
-		}
-
-		output, err := context.Bucket.ListObjects(&service.ListObjectsInput{
-			Prefix:    convert.String(directory),
-			Delimiter: convert.String("/"),
-		})
-		if err != nil {
-			return err
-		}
-
-		if len(output.Keys) == 0 && len(output.CommonPrefixes) == 0 {
-			return fmt.Errorf(`directory "%s" not exists`, directory)
-		}
-	}
-
 	d.prefix = fmt.Sprintf("/%s", directory)
 	return nil
 }
