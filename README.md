@@ -67,9 +67,9 @@ ___Note:__ All FTP commands can be found here ([https://tools.ietf.org/html/rfc5
 
 ## References
 
-- [QingStor Documentation](https://docs.qingcloud.com/qingstor/index.html)
-- [QingStor Guide](https://docs.qingcloud.com/qingstor/guide/index.html)
-- [QingStor APIs](https://docs.qingcloud.com/qingstor/api/index.html)
+- [QingStor Documentation](https://docsv4.qingcloud.com/user_guide/storage/object_storage/intro/product/)
+- [QingStor Guide](https://docsv4.qingcloud.com/user_guide/storage/object_storage/)
+- [QingStor APIs](https://docsv4.qingcloud.com/user_guide/storage/object_storage/api/)
 - [FTP Command and Extension Registry](https://tools.ietf.org/html/rfc5797)
 
 ## Statement
